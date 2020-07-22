@@ -3,8 +3,8 @@
 //'index' page
 
 // colorizing
-var string_color = 'black';
-//var string_color = 'white'; //theme dark?
+// var string_color = 'black';
+var string_color = 'white'; //theme dark?
 var networkdot_color = 'hotpink';
 var networkdot_stroke_color = 'white';
 // var networkdot_color = '#51D0FD';
