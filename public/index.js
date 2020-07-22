@@ -42,13 +42,11 @@ $(document).ready(function() {
     // AudioImport_p5("./audio/clap@2/" + ("0" + getRandomInt(1, 2)).slice(-2) + ".mp3"),
 
     //sounds page ==> 7
-    AudioImport("./audio/01.mp3"),
-    AudioImport("./audio/02.mp3"),
-    AudioImport("./audio/03.mp3"),
-    AudioImport("./audio/04.mp3"),
-    AudioImport("./audio/05.mp3"),
-    AudioImport("./audio/06.mp3"),
-    AudioImport("./audio/07.mp3"),
+    AudioImport("./audio/smack1.mp3"),
+    AudioImport("./audio/smack2.mp3"),
+    AudioImport("./audio/smack3.mp3"),
+    AudioImport("./audio/smack4.mp3"),
+    AudioImport("./audio/smack5.mp3"),
     //
   ]).then(function(imports) {
 
