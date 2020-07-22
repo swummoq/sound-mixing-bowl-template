@@ -11,55 +11,7 @@ var networkdot_stroke_color = 'white';
 // var networkdot_stroke_color = '#FFE40A';
 var mixer_bg = true;
 
-
-var starthue = .5;
-var endhue = .8;
-var hue = starthue;
-var huejump = 0.005;
-var color = new Color(1, 1, 1, 0.1);
-var maxDots = 300;
-var shapes = [];
-var r = [];
-
-var f = function (event) {
-  color.brightness = hue;
-
-  hue += huejump;
-
-  if (hue > endhue) { //
-    huejump *= -1;
-  }
-
-  if (hue < starthue) {
-    huejump *= -1;
-  }
-
-  var shape = new Shape.Circle({
-    center: event.point,
-    radius: 120,
-    fillColor: color,
-  }).sendToBack();
-
-
-  r.push(shape);
-  if (r.length > maxDots) {
-    var s = r.shift();
-    s.remove();
-  }
-}
-
-function onMouseMove(event) {
-  f(event);
-}
-
-var layer = new Layer({
-  children: r,
-  strokeColor: 'black',
-  position: view.center
-}).sendToBack();
-
-console.log(1);
-var mixer_bg_color = new Color(0, 0, 0, 1); // buttermilk, opacity 50%
+var mixer_bg_color = new Color(0, 0, 0, 0); // buttermilk, opacity 50%
 $(document).ready(function () {
 
   //metrics related to 'view size'
