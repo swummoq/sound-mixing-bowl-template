@@ -10,8 +10,56 @@ var networkdot_stroke_color = 'white';
 // var networkdot_color = '#51D0FD';
 // var networkdot_stroke_color = '#FFE40A';
 var mixer_bg = true;
-var mixer_bg_color = new Color(1, 0.95, 0.71, 0.5); // buttermilk, opacity 50%
 
+
+var starthue = .5;
+var endhue = .8;
+var hue = starthue;
+var huejump = 0.005;
+var color = new Color(1, 1, 1,0.1);
+var maxDots = 300;
+var shapes = [];
+var r = [];
+
+var f = function (event) {
+	color.brightness = hue;
+
+	hue += huejump;
+
+	if (hue > endhue) { //
+		huejump *= -1;
+	}
+
+	if (hue < starthue) {
+		huejump *= -1;
+	}
+
+	var shape = new Shape.Circle({
+		center: event.point,
+		radius: 120,
+		fillColor: color,
+  }).sendToBack();
+
+
+	r.push(shape);
+	if (r.length > maxDots) {
+		var s = r.shift();
+		s.remove();
+	}
+}
+
+function onMouseMove(event) {
+	f(event);
+}
+
+var layer = new Layer({
+  children: r,
+  strokeColor: 'black',
+  position: view.center
+}).sendToBack();
+
+console.log( 1 );
+var mixer_bg_color = new Color(0, 0, 0, 1); // buttermilk, opacity 50%
 $(document).ready(function() {
 
   //metrics related to 'view size'
@@ -73,8 +121,8 @@ $(document).ready(function() {
       '03': imports[11],
       '04': imports[12],
       '05': imports[13],
-      '06': imports[14],
-      '07': imports[15],
+      // '06': imports[14],
+      // '07': imports[15],
     };
     //audio-players' bank
     var players = {
@@ -83,8 +131,8 @@ $(document).ready(function() {
       '03': [],
       '04': [],
       '05': [],
-      '06': [],
-      '07': [],
+      // '06': [],
+      // '07': [],
     };
 
     //top layer
@@ -128,7 +176,7 @@ $(document).ready(function() {
     }
 
     //
-    for (var row = 0; row < 7; row++) {
+    for (var row = 0; row < Object.keys(sounds).length; row++) {
       for (var col = 0; col < 1; col++) {
         var idx = row * 1 + col;
 
@@ -143,11 +191,11 @@ $(document).ready(function() {
                   point: [vssw * 0.8, row * vssw * 1.4 + vssw * 1.2],
                   radius: vssw * 0.4,
                   size: [vssw * 1.5, vssw * 0.7],
-                  fillColor: new Color({
-                    hue: getRandom(20, 60),
-                    saturation: 1,
-                    brightness: 1
-                  }),
+                  // fillColor: new Color({
+                  //   hue: 0, //getRandom(20, 60),
+                  //   saturation: 1,
+                  //   brightness: 1
+                  // }),
                 }),
                 plus.clone()
               ],
@@ -187,11 +235,11 @@ $(document).ready(function() {
                   point: [vssw * 2.9, row * vssw * 1.4 + vssw * 1.2],
                   radius: vssw * 0.4,
                   size: [vssw * 1.6, vssw * 0.7],
-                  fillColor: new Color({
-                    hue: getRandom(120, 180),
-                    saturation: 1,
-                    brightness: 1
-                  }),
+                  // fillColor: new Color({
+                  //   hue: getRandom(120, 180),
+                  //   saturation: 1,
+                  //   brightness: 1
+                  // }),
                 }),
                 minus.clone()
               ],
@@ -227,7 +275,7 @@ $(document).ready(function() {
                     brightness: 1
                   }),
                   strokeWidth: vssw * 0.03,
-                  fillColor: new Color(1, 1, 1, 0.5)
+                  // fillColor: new Color(1, 1, 1, 0.5)
                 }),
                 faster.clone()
               ],
@@ -273,7 +321,7 @@ $(document).ready(function() {
                     brightness: 1
                   }),
                   strokeWidth: vssw * 0.03,
-                  fillColor: new Color(1, 1, 1, 0.5)
+                  // fillColor: new Color(1, 1, 1, 0.5)
                 }),
                 slower.clone()
               ],
@@ -378,4 +426,11 @@ $(document).ready(function() {
 
   });
 
+
+
+
 });
+
+
+
+
