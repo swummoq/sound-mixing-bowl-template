@@ -85,7 +85,31 @@ $(document).ready(function () {
     SVGImport_size1('./imgs/minus.svg'),
     SVGImport_size1('./imgs/faster.svg'),
     SVGImport_size1('./imgs/slower.svg'),
+
+    //clap
+    // AudioImport_p5("./audio/clap@2/" + ("0" + getRandomInt(1, 2)).slice(-2) + ".mp3"),
+
+    // //sounds page ==> 7
+    // AudioImport("./audio/smack1.mp3"),
+    // AudioImport("./audio/smack2.mp3"),
+    // AudioImport("./audio/smack3.mp3"),
+    // AudioImport("./audio/smack4.mp3"),
+    // AudioImport("./audio/smack5.mp3"),
+    //
   ]).then(function (imports) {
+
+     //imgs
+     var logo = imports[0];
+     var anext = imports[1];
+     var aprev = imports[2];
+     var hand = imports[3];
+     var iconsound = imports[4];
+     var plus = imports[5];
+     var minus = imports[6];
+     var faster = imports[7];
+     var slower = imports[8];
+
+console.log( imports );
     //pre-load resources (images + audios)
     Promise.all([
       //clap
@@ -99,23 +123,40 @@ $(document).ready(function () {
       AudioImport("./audio/smack5.mp3"),
       //
     ]).then(function (sound_imports) {
-      //imgs
-      var logo = imports[0];
-      var anext = imports[1];
-      var aprev = imports[2];
-      var hand = imports[3];
-      var iconsound = imports[4];
-      var plus = imports[5];
-      var minus = imports[6];
-      var faster = imports[7];
-      var slower = imports[8];
+      console.log( sound_imports );
+    
+      //clap
+      // var clap = imports[9];
 
-      var sounds = {};
-      var players = {};
-      for( var k in sound_imports ) {
-        sounds[ k ] = sound_imports[ k ];
-        players[ k ] = [];
-      }
+      //audio-files dictionary {key: value}
+      //N.B.: Duplicate keys are not allowed!
+      //      i.e. if '01' appearing twice will be a problem.
+      var sounds = {
+        '01': sound_imports[9],
+        '02': sound_imports[10],
+        '03': sound_imports[11],
+        '04': sound_imports[12],
+        '05': sound_imports[13],
+        // '06': imports[14],
+        // '07': imports[15],
+      };
+      //audio-players' bank
+      var players = {
+        '01': [],
+        '02': [],
+        '03': [],
+        '04': [],
+        '05': [],
+        // '06': [],
+        // '07': [],
+      };
+
+      // var players = {};
+      // for( var k in sounds ) {
+      //   console.log( k )
+      //   players[ k ] = []
+      // }
+      console.log( players )
 
       //top layer
       var top = new Layer(); // new Layer() will be automatically activated at the moment.
